@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <p class="p-0 ">Welcome to <span class="text-primary">TextUtils</span> <span
+            class="text-success">{{request.user.username}}</span>. Manage & Edit your Texts.</p>
+
+            <!--Form to post the input text -->
+    <form action="{% url 'analyze' %}" method="POST" class="form-group">
+        {% csrf_token %}
+        <textarea name="text" id="" cols="30" rows="10" class="form-control" placeholder="Your text here"></textarea>
+        <p class="lead">Please select anyone of the following options.</p>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" name="removepunc" id="removepunc">
+            <label class="custom-control-label" for="removepunc">Remove Punctuations</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="fullcaps" class="custom-control-input" id="fullcaps">
+            <label for="fullcaps" class="custom-control-label">Capitalize Letters.</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="newlineremover" id="newlineremover" class="custom-control-input">
+            <label for="newlineremover" class="custom-control-label">Remove New Lines</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="spaceremover" id="spaceremover" class="custom-control-input">
+            <label for="spaceremover" class="custom-control-label">Remove Extra Spaces</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="count" id="count" class="custom-control-input">
+            <label for="count" class="custom-control-label">Count total words. </label>
+        </div>
+
+        <input type="submit" value="Analyze Text" class="btn btn-success text-white  mt-2">
+    </form>
+</div>
+{% endblock content %}
+
+{% block style %}
+<style>
+    textarea {
+        border: 0.5px ridge #333;
+        ;
+    }
+</style>
+{% endblock style %}

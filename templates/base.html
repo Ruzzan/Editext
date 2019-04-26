@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <title>{% block title %}  {% endblock title %} </title>
+</head>
+
+
+<body>
+    <!--Navbar-->
+    <header>
+        <a href="{% url 'home'%}" class="logo"> <img src="{% static 'images/logo.png'%}" alt="" height="50px" width="50px" > </a>
+        <i class="fa fa-bars fa-2x"></i>
+        <span class="text-white text-center" id="title">TextUtils</span>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contacts</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="javascript:{document.getElementById('logout').submit()}">Log Out</a></li>
+                <!--Log out form-->
+                <form action="{% url 'logout' %}" method="POST" id="logout">
+                    {% csrf_token %}
+                    <input type="hidden" name="logout">
+                </form>
+                {% else %}
+                <li><a href="{% url 'login' %}">Log In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <footer class=" fixed-bottom bg-dark text-white text-center">
+        <h2 class="lead">TextUtils &copy; <span id="year"></span> </h2>
+    </footer>
+
+
+
+
+ <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+</body>
+
+
+
+<script>
+
+$(document).ready(function () {
+    // Toggle the navbar (mobile view)
+    $('.fa-bars').click(function() {
+       $('nav').toggleClass('active');
+    } );
+
+    // Show the year
+    $('#year').text((new Date).getFullYear());
+});
+
+</script>
+
+</html>

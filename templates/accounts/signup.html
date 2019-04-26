@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Sign Up {% endblock title %}
+
+{% block content %}
+    <div class="container mt-2">
+        <h2 class="text-success text-center"> Sign Up </h2>
+        <div class="card mx-auto col-md-6">
+            <form action="{% url 'signup' %}" method="POST" class="form-group mt-2">
+                {% csrf_token %}
+               <span class="text-danger lead">  {{error}} </span> <br>
+                Username:
+                <input type="text" name="username" id="" class="form-control" placeholder="Username"> <br>
+                Password:
+                <input type="password" name="password1" id="" placeholder="Password" class="form-control"> <br>
+                Confirm Password
+                <input type="password" name="password2" id="" class="form-control" placeholder="Confirm Your Password"> <br>
+                <p class="lead"> Already a member? <a href="{% url 'login' %}"> Log In </p> </span>
+                <input type="submit" value="Sign Up" class="btn btn-success btn-block mb-0">
+            </form>
+        </div>
+    </div>
+
+
+{% endblock content %}

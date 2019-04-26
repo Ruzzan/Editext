@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Result of Text {% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h3 class="text-primary text-center">
+            Your Analyzed Text - <span class="text-success"> {{ task }} </span>
+            <span class="text-danger"> {{error}} </span>
+            <br>
+            {{count}}
+        </h3>
+        <div class=" mx-auto" style="white-space: pre-wrap;">
+            {{ analyzed_text }}
+        </div>
+        <button class="btn btn-outline-warning mx-auto mt-3"> <a href="{% url 'home' %}" class="text-muted"> Try Again </a> </button>
+    </div>
+{% endblock content %}
